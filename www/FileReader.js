@@ -121,7 +121,8 @@ function readSuccessCallback (readType, encoding, offset, totalSize, accumulate,
         return;
     }
 
-    var CHUNK_SIZE = FileReader.READ_CHUNK_SIZE;
+    var CHUNK_SIZE = totalSize; // Prevent chunk reading as workaround for UTF8 file reading errors.
+    // var CHUNK_SIZE = FileReader.READ_CHUNK_SIZE;
     if (readType === 'readAsDataURL') {
         // Windows proxy does not support reading file slices as Data URLs
         // so read the whole file at once.
